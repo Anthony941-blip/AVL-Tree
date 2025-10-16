@@ -93,22 +93,35 @@ AVLNode* insert(AVLNode* node, int key) {
    
    
     // 4. If unbalanced, there are 4 cases:
-    
+    if(balance > 1 && key < node->left->key) {
+	return rotateRight(node);
+}
     // Left Left Case: Right rotation needed
-   
+    if(balance > 1 && key < node->left->key) { 
+        return rotateRight(node);
+}
     
     // Right Right Case: Left rotation needed
-    
+     if(balance < -1 && key > node->right->key) { 
+        return rotateLeft(node);
+}
+
     
     
     // Left Right Case: Left rotation on left child, then right rotation
-    
+    if(balance > 1 && key > node->left->key) {
+	node->left = rotateLeft(node->left);
+	return rotateRight(node);
+}
     
     // Right Left Case: Right rotation on right child, then left rotation
-    
+    if(balance < -1 && key < node->right->key) {
+	node->right = rotateRight(node->right);
+	return rotateLeft(node);
+}
     
     // Return the (unchanged) node pointer
-   
+   return node;
 }
 
 // Find the node with minimum key value (leftmost node)
