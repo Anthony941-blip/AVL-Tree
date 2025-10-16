@@ -60,14 +60,15 @@ AVLNode* rotateRight(AVLNode* y) {
 // Left Rotation
 // Used when right subtree is heavier (Right-Right case)
 AVLNode* rotateLeft(AVLNode* x) {
-   
-    
+   AVLNode* y = x->right;
+    AVLNode* T2 = y->left;
     // Perform rotation
-   
-    
+   y->left = x;
+    x->right = T2;
     // Update heights
-    
-    
+    updateHeight(y);
+    updateHeight(x);
+
     return y;  // New root of this subtree
 }
 
